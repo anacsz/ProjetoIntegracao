@@ -11,6 +11,7 @@ const getAll = async (req, res) => {
   const titulos = await Titulo.find().populate('estudio')
   res.status(200).json(titulos)
 }
+
 const createTitle = async (req, res) => {
   const titulo = new Titulo({
     _id: new mongoose.Types.ObjectId(),

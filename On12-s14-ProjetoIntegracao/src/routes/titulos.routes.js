@@ -1,30 +1,19 @@
 const express = require('express')
 const router = express.Router()
-const mongoose = require(mongoose)
-const Titulo = require('../models/titulo')
+const controller = require('../controllers/tituloController')
 
-router.get('/', async (req, res) =>{
-    const titulos = await Titulo.find().populate('estudio')
-    res.status(200).json(titulos)
-})
+router.get('/pixar', controller.getAllPixar)
 
-router.post('/', async(req, res) =>{
-    const titulo = new Titulo({
-        _id: new mongoose.Types.ObejectId(),
-        nome: req.body.nome,
-        genero: req.body.descricao,
-        descricao: req.body.estudio,
-        criadoEm: req.body.criadoEm
 
-    })
+router.get('/', controller.getAll)
 
-    try{
-        const novoTitulo = await titulo.save()
-        res.status(201).json(novoTitulo)
 
-    }catch(err){
-        res.status(400).json({message: err.message})
-    }
-})
+router.post('/', controller.createTitle)
+
+//listar um titulo/get/findById
+
+//atualizar uma informacao especifica num titulo/patch/findById/save
+
+//deletar um titulo/delete/findById/remove
 
 module.exports = router
